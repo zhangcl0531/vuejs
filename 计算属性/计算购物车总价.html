@@ -8,27 +8,78 @@
     <title>计算购物车总价</title>
 </head>
 <div id="demo">
-
+    两个购物车总价： {{prices}}
 </div>
 
 <body>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
     <script>
+        //需求： 计算购物车中所有物品的价格
+        var app1 = new Vue({
+            el: '#demo1',
+            data: {
+                package3: [{
+                        name: 'iphone',
+                        price: 1000,
+                        count: 2
+                    },
+                    {
+                        name: 'ipad',
+                        price: 2000,
+                        count: 1
+                    }
+                ],
+            }
+        })
+
+
         var app = new Vue({
             el: '#demo',
             data: {
                 //第一个购物车
-                package1: {
+                package1: [{
+                        name: 'iphone',
+                        price: 6999,
+                        count: 2
+                    },
+                    {
+                        name: 'ipad',
+                        price: 3600,
+                        count: 1
+                    }
+                ],
 
-                },
+
                 //第二个购物车
-                package2: {
-
-                },
+                package2: [{
+                        name: 'iphone8',
+                        price: 6999,
+                        count: 1
+                    },
+                    {
+                        name: 'ipad6',
+                        price: 3600,
+                        count: 2
+                    }
+                ],
             },
             computed: {
                 prices: function () {
+                    var prices = 0
+                    for (var i = 0; i < this.package1.length; i++) {
+                        console.log(this.package1.length)
+                        prices += this.package1[i].price * this.package1[i].count
+                    }
+                    console.log(prices)
+                    for (var j = 0; j < this.package2.length; j++) {
+                        prices += this.package2[j].price * this.package2[j].count
+                    }
 
+                    for (var x = 0; x < app1.package3.length; x++) {
+                        prices += this.package2[x].price * this.package2[x].count
+                    }
+
+                    return prices
                 }
             }
         })

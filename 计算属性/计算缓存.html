@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算缓存</title>
+</head>
+<body>
+    <div id="demo">
+        修改date值，计算属性获取到的值不会改变，methods会改变
+        {{ text }} <br>
+
+        计算属性缓存： <br>
+        {{ now }} <br>
+        通过methods拿到的时间戳（方法需要加括号）： <br>
+        {{ thisTime() }}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#demo',
+            data: {
+                text:'123'
+            },
+            computed: {
+                now:function(){
+                    return Date.now()
+                }
+            },
+            methods:{
+                thisTime:function(){
+                    return Date.now()
+                }
+            }
+        })
+    </script>
+</body>
+</html>
