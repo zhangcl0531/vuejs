@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>点击按钮切换背景颜色</title>
+    <style>
+        .btbackgroundred{
+            width: 100px;
+            height: 100px;
+            background-color: red
+        }
+        .btbackgroundblue{
+            width: 100px;
+            height: 100px;
+            background-color: blue
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div :class="{btbackgroundred:isred,btbackgroundblue:isblue}"></div>
+        <input type="button" value="切换" v-on:click="changecolor">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                isred:true,
+                isblue:false
+            },
+            methods:{
+                changecolor:function(){
+                    this.isred = !this.isred
+                    this.isblue = !this.isblue
+                    
+                }
+            }
+        })
+    </script>
+</body>
+</html>
