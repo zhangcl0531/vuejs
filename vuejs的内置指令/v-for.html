@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-for指令</title>
+</head>
+<body>
+    <div id="app">
+        v-for的用法：v-for 一定是写在要遍历的元素上，v-for后接等号,类似于item in items<br>
+        1.遍历多个对象,多个对象一定是数组： <br>
+        学好vuejs的方法是：
+        <ul>
+            <li v-for="(item, index) in vueMethods" :key="index">{{index}}:{{item.name}}</li>
+        </ul>
+        <hr>
+
+        2.遍历一个对象的多个属性：<br>
+          拿到value,key,index 的写法  v-k-i
+        <ul>
+            <li v-for="(item, key, index) in abb" :key="index">{{index}}:{{key}}-{{item}}</li>
+        </ul>
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                vueMethods:[
+                    {name:'多思考'},
+                    {name:'多练习'},
+                ],
+                abb:{
+                    a1:'n',
+                    a2:'m',
+                    a3:'s',
+                    a4:'l'
+                }
+            },
+        })
+    </script>
+</body>
+</html>
