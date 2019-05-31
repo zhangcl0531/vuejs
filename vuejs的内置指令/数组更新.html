@@ -15,6 +15,10 @@
         <button v-on:click="changesetone">set方法改变数组指定项</button>
         <button v-on:click="changearrlength">改变数组长度</button>
         <button v-on:click="changesplicelength">splice改变数组长度</button>
+        <hr>
+        过滤filter，使用计算属性
+        返回字符串中含有oo的项：
+        {{ matchOO }}
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
     <script>
@@ -22,6 +26,13 @@
             el:'#app',
             data:{
                 arr:['book','pen','pencil']
+            },
+            computed: {
+                matchOO:function(){
+                    return this.arr.filter(function(book){
+                        return book.match(/oo/)
+                    })
+                }
             },
             methods: {
                 //利用sort进行排序

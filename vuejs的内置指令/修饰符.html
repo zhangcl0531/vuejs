@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>方法与事件</title>
+</head>
+
+<body>
+    <div id="app">
+        stop用法：<br>
+        <div @click='divclick' style="width: 500px;height:500px;background-color: aquamarine">
+            <button @click='buttonclick'>点击</button>
+            <button @click.stop='buttonclick'>阻止单击事件向上冒泡</button>
+        </div>
+        <hr>
+        prevent用法 提交事件并且不重载页面：<br>
+        每次提交表单都会重载页面
+        <form action="">
+            <button type="submit">提交表单</button>
+        </form>
+        <form action="" @submit.prevent='hangle'>
+            <button type="submit">提交表单不重载</button>
+        </form>
+        <hr>
+        self用法： 只作用在元素本身而非子元素的时候调用 <br>
+        <div @click.self='divclick' style="width: 500px;height:500px;background-color: aquamarine">
+            <button @click.self='buttonclick'>点击</button>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    arr: ['book', 'pen', 'pencil']
+                },
+                methods: {
+                    divclick: function () {
+                        alert('点击了div')
+                    },
+                    buttonclick: function () {
+                        alert('点击了button')
+                    },
+                    hangle: function () {
+                        alert('提交表单，不重载')
+                    }
+                },
+            })
+        </script>
+</body>
+
+</html>
