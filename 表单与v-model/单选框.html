@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>单选框</title>
+</head>
+<body>
+    <div id="app">
+        单选框： <br>
+        单个单选框：
+        <input type="radio" name="" id="" v-bind:checked="oneradio">
+        <hr>
+
+        多个单选框：
+        需要v-model来配合value使用，绑定选中的单选框的value值，此处所绑定的初始值可以随意给 <br>
+        
+        猫蛋：<input type="radio" name="checks" id="" value="猫蛋" v-model="checkname">
+        狗蛋：<input type="radio" name="checks" id="" value="狗蛋" v-model="checkname">
+        翠花：<input type="radio" name="checks" id="" value="翠花" v-model="checkname"><br>
+        此时选择v-model绑定的checkname的值 ----  {{checkname}}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                oneradio:true,
+                checkname:'狗蛋'
+            }
+        })
+    </script>
+</body>
+</html>

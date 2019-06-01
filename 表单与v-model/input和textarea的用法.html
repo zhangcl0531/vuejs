@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>input和textarea的用法</title>
+</head>
+<body>
+    <div id="app">
+        v-model的input and textarea用法：<br>
+        <input type="text" v-model="value"> <br>
+        {{value}}
+
+        <hr>
+        <textarea name="" id="" cols="30" rows="10" v-model="msg">我是多行文本的初始化值</textarea> <br>
+        {{msg}}
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                value:'',
+                msg:''
+            }
+        })
+    </script>
+</body>
+</html>

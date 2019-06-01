@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>复选框</title>
+</head>
+<body>
+    <div id="app">
+        单个复选框：<br>
+        单个复选框使用v-bind绑定:
+        <input type="checkbox" name="" id="" v-bind:checked="onecheck"><br>
+        单个复选框使用v-model绑定:
+        <input type="checkbox" name="" id="" v-model="onecheck">
+        <hr>
+
+        多个复选框：<br>
+        使用v-model来配合value使用，v-model绑定的value是一个数组，如果绑定的是字符串，则会被转化为true or false <br>
+
+        猫蛋：<input type="checkbox" name="" id="" value="猫蛋" v-model="checks">
+        狗蛋：<input type="checkbox" name="" id="" value="狗蛋" v-model="checks">
+        翠花：<input type="checkbox" name="" id="" value="翠花" v-model="checks"><br>
+        现在选中了： {{checks}}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                onecheck:true,
+                checks:[] // '',
+            }
+        })
+    </script>
+</body>
+</html>

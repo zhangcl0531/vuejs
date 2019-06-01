@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绑定值</title>
+</head>
+<body>
+    <div id="app">
+        绑定值： <br>
+        单选按钮：<br>
+        只需要用v-bind给单个单选框绑定一个value值，此时，v-model绑定的就是他的value值，即picked的值 <br>
+        <input type="radio" v-model="picked" v-bind:value="value"><br>
+        此时选中的值： {{picked}}
+
+        <hr>
+        复选框： <br>
+        <input type="checkbox"  v-model="toggle" :true-value='value1' :false-value='value2'><br>
+
+        此时v-model的值： {{toggle}} <br>
+        被选中： {{toggle == value1}} <br>
+        未被选中： {{toggle == value2}}
+
+        <hr>
+
+        下拉框：<br>
+        <select v-model="selected">
+                <option value="猫蛋">猫蛋</option>
+                <option value="狗蛋">狗蛋</option>
+                <option value="翠花">翠花</option>
+                <option :value="{num:111}">1111</option>
+        </select><br>
+        现在选中的是: {{selected}}  typeof: {{typeof selected}}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+        var app= new Vue({
+            el:'#app',
+            data:{
+                picked:true,
+                value:'111',
+                toggle:true,
+                value1:'我被选中了',
+                value2:'我没被选中',
+                selected:''
+            }
+        })
+    </script>
+</body>
+</html>
