@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件的使用方法</title>
+</head>
+
+<body>
+    <div id="app">
+        APP：
+        <my-component></my-component>
+        <hr>
+        html标签受限：
+        table中只能有tr,td，tbody这些元素，下面那样声明div标签并没有在table中
+        <table>
+            <my-component></my-component>
+        </table><br>
+        使用is属性，div就包裹在table里面了：<br>
+        <table>
+            <tbody is="my-component"></tbody>
+        </table>
+
+        <hr>
+        两个按钮点击数值同时增加问题：<br>
+        不使用组件：<br>
+        <button @click="plus">{{count}}</button>
+        <button @click="plus">{{count}}</button>
+        <br>
+        使用组件：<br>
+        <btn-component></btn-component>
+        <btn-component></btn-component>
+    </div>
+    <hr>
+    <div id="bpp">
+        bpp:  <br>
+        全局：<my-component></my-component>
+
+        局部：<myb-component></myb-component>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+        //全局注册
+        // Vue.component(tagm{
+        //     template:'<div></div>'
+        // })
+        //注册组件
+        Vue.component('my-component', {
+            template: '<div>我是全局组件的内容</div>'
+        })
+        var app = new Vue({
+            el:'#app',
+            components:{
+                'btn-component':{
+                    template:'<button @click="count++">{{count}}</button>',
+                    data() {
+                        return {
+                            count:0
+                        }
+                    },
+                }
+            },
+            data:{
+                count:1
+            },
+            methods: {
+                plus:function(){
+                    this.count = this.count + 1
+                }
+            },
+        })
+        //局部注册
+        
+        var bpp = new Vue({
+            el:'#bpp',
+            components:{
+                'myb-component':{
+                    template:'<div>我是局部组件内容</div>'
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

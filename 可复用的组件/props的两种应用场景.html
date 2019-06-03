@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        父组件传递初始值进来，子组件将它作为初始值保存起来，在自己的作用域<br>
+        下可以随意使用和修改。这种情况可以在组件 data 内再声明一个数据，引用父组件<br>
+        的 prop <br>
+        步骤一：注册组件 <br>
+        步骤二：将父组件的数据传递进来，并在子组件中用props接收 <br>
+        步骤三：将传递进来的数据通过初始值保存起来 <br>
+        <hr>
+        <my-component msg='我是父组件传递的数据'></my-component>
+        <hr>
+        另一种情况就是 prop 作为需要被转变的原始值传入。这种情况用计算属性就可以了 <br>
+        步骤一：注册组件 <br>
+        步骤二：将父组件的数据传递进来，并在子组件中用props接收 <br>
+        步骤三：将传递进来的数据通过计算属性进行重新计算 <br>
+
+        需求： 通过input框中输入的数据直接改变div的宽度<br>
+        <input type="text" v-model="width">
+        <width-component :width="width"></width-component>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+        Vue.component('my-component', {
+            props: ['msg'],
+            template: '<div>{{count}}</div>',
+            data() {
+                return {
+                    count: this.msg
+                }
+            },
+        })
+
+        var app = new Vue({
+            el: '#app',
+            data:{
+                width:0
+            },
+            components:{
+                'width-component':{
+                    props:['width'],
+                    template:'<div :style="style">hhh</div>',
+                    computed:{
+                        style:function(){
+                            return{
+                                width:this.width+'px',
+                                background:'red',
+                                height:'30px'
+                            }
+                        }
+
+                        
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
