@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <my-acomponent ref="a"></my-acomponent>
+        <my-bcomponent></my-bcomponent>
+        <hr>
+        <child-component></child-component><br>
+        {{msg}}
+        <hr>
+        父组件获取子组件的数据：<br>
+        {{forchild}}
+        <button @click="getchilddata">点击获取A组件的内容</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+        Vue.component('my-acomponent',{
+            template:'<div><button @click="handle">点击向B组件传递数据</button></div>',
+            data:function(){
+                return {
+                    aaa:'我是来自A组件的内容'
+                }
+            },
+            methods: {
+                handle:function(){
+                    this.$root.bus.$emit('lala',this.aaa)
+                }
+            },
+        })
+
+        Vue.component('my-bcomponent',{
+            template:'<div></div>',
+            created() {
+                //B组件在实列创建的时候就监听事件---lala事件
+                this.$root.bus.$on('lala',function(value){
+                    alert(value)
+                })
+            },
+        })
+
+        Vue.component('child-component',{
+            template:'<button @click="setfatherdata">通过点击我修改父组件的数据</button>',
+            methods:{
+                setfatherdata:function(){
+                    this.$parent.msg = '我是子组件传过来的'
+                }
+            }
+        })
+        var app = new Vue({
+            el:'#app',
+            data:{
+                bus:new Vue(),
+                msg:'我是父组件的元数据',
+                forchild:'还没拿到子组件数据'
+            },
+            methods:{
+                getchilddata:function(){
+                    //来拿子组件的内容,给子组件标签添加一个red属性
+                    this.forchild = this.$refs.a.aaa
+                }
+            }
+        })
+    </script>
+</body>
+</html>
