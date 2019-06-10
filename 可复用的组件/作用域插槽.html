@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-component>
+            <!-- vue2.5之前只能用<template>标签，2.5之后可以用任意标签 -->
+            <p slot="abc" slot-scope="pppp">
+                {{pppp.text}}
+                {{pppp.ss}}
+            </p>
+        </my-component>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            components: {
+                'my-component': {
+                    template: '<div>\
+                        <slot text="我是子组件的内容" name="abc" ss="xxxxxxx">\
+                        </slot>\
+                    </div>'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
