@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <component :is="thisview"></component>
+        <button @click="handleview('A')">A</button>
+        <button @click="handleview('B')">B</button>
+        <button @click="handleview('C')">C</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+
+        //需求：通过点击不同的按钮切换不同的视图
+
+        Vue.component('comA',{
+            template:'<div>我是组件A</div>'
+        })
+
+        Vue.component('comB',{
+            template:'<div>我是组件B</div>'
+        })
+
+        Vue.component('comC',{
+            template:'<div>我是组件C</div>'
+        })
+
+        var app = new Vue({
+            el:'#app',
+            data:{
+                thisview:'comA'
+            },
+            methods: {
+                handleview:function(tag){
+                    this.thisview = 'com' + tag
+                }
+            },
+        })
+
+        
+
+    </script>
+</body>
+</html>

@@ -12,7 +12,7 @@
     <div id="app">
         单个插槽：
         <my-component>
-        <p>我是父组件的内容</p>
+            <p>我是父组件的内容</p>
         </my-component>
         <hr>
         具名插槽：
@@ -38,8 +38,8 @@
                                     </slot>\
                                 </div>'
                 },
-                'name-component':{
-                    template:'<div>\
+                'name-component': {
+                    template: '<div>\
                             <div class="header">\
                                 <slot name="header"></slot>\
                             </div>\
@@ -49,9 +49,18 @@
                             <div class="footer">\
                                 <slot name="footer"></slot>\
                             </div>\
-                            </div>'
+                            </div>',
+                    mounted: function () {
+                        //访问插槽
+                        var header = this.$slots.header;
+                        var text = header[0].elm.innerText;
+                        var html = header[0].elm.innerHTML;
+                        console.log(header)
+                        console.log(text)
+                        console.log(html)
+                    },
                 }
-            }
+            },
         })
     </script>
 </body>
