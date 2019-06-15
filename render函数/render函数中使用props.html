@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <child :show="show"></child><br>
+        <button @click="switchshow">切换</button> {{show}}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+        //需求：点击按钮切换图片
+        Vue.component('child', {
+            props: ['show'],
+            render: function (createElement) {
+                var imgsrc
+                if (this.show) {
+                    imgsrc = './1.png'
+                } else {
+                    imgsrc = './2.png'
+                }
+                return createElement('img', {
+                    attrs: {
+                        src: imgsrc
+                    }
+                })
+            },
+        })
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                show: false
+            },
+            methods: {
+                switchshow: function () {
+                    this.show = !this.show
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

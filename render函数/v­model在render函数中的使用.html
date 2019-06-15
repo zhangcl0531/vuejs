@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <child :name="name" @input="showname"></child><br>
+        <!-- 也可以使用下面的v-model方法，直接绑定name，父组件内的showname就可以不用定义啦 -->
+        <!-- <child :name="name" v-model="name"></child><br> -->
+        {{name}}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+        //需求，使用render函数实现input框输入并在页面实时展示输入内容
+
+
+        Vue.component('child', {
+            props: ['name'],
+            render(createElement) {
+                var self = this //指的就是当前vue实例
+                return createElement('input', {
+                    //用来写原生的Dom属性
+                    domProps: {
+                        value: self.name
+                    },
+                    //添加事件
+                    on: {
+                        input: function (event) {
+                            //子组件向父组件传递数据，如果不懂看可复用组件的内容
+                            self.$emit('input', event.target.value)
+                        }
+                    }
+                })
+            },
+        })
+        var app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    name: 'jack'
+                }
+            },
+            methods: {
+                //子组件向父组件传递数据，如果不懂看可复用组件的内容
+                showname: function (value) {
+                    this.name = value
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

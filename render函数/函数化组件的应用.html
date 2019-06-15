@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <child value="hh"></child>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+        Vue.component('child', {
+            functional:true, //表示当前的vue实例无状态，无实例
+            render(createElement,context) {
+                return createElement('button',{
+                    on:{
+                        click:function(){
+                            alert(context.props.value)
+                            alert(context.parent.msg)
+                        }
+                    }
+                },'点击我学习context')
+            },
+            props:['value']
+        })
+
+        var app = new Vue({
+            el:'#app',
+            data() {
+                return {
+                    msg:'我是父组件内容'
+                }
+            },
+        })
+    </script>
+</body>
+</html>
